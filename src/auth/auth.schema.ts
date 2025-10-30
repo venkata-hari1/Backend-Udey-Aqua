@@ -6,6 +6,8 @@ export class Auth{
      email:string
     @Prop({required:true})
      password:string
+    @Prop()
+    otp:string
 }
 export type AuthDocument=Auth & Document
 export const AuthSchema=SchemaFactory.createForClass(Auth)

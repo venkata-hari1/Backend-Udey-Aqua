@@ -1,6 +1,6 @@
-import { Body, Controller, Post, Req } from '@nestjs/common';
+import { Body, Controller, Patch, Post, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { RegsiterDto, LoginDto, ForgetPasswordDto } from './dto/auth.dto';
+import { RegsiterDto, LoginDto, ForgetPasswordDto, ResetPasswordDto } from './dto/auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Auth, AuthDocument } from './auth.schema';
 import { Model } from 'mongoose';
@@ -20,9 +20,13 @@ export class AuthController {
   async login(@Body() body:LoginDto) {
     return this.authService.login(this.Model, this.JwtService, body)
   }
-  @Post('forgetpassword')
+  @Patch('forgetpassword')
   async ForgetPassword(@Body() body:ForgetPasswordDto){
    return this.authService.ForgetPassword(this.Model,body)
+  }
+  @Patch('resetpassword')
+  async ResetPassword(@Body() body: ResetPasswordDto){
+    return this.authService.ResetPassword(this.Model,body)
   }
 
 }
