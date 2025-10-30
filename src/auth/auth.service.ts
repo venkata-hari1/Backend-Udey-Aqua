@@ -44,5 +44,15 @@ export class AuthService {
         throw new InternalServerErrorException(error)
     }
     }
+    async ForgetPassword(Model,body){
+     try{
+       
+        const data=await Model.findOne({email:body.email}).lean()
+        return {status:true,data}
+     }
+     catch(error){
+       new InternalServerErrorException(error)
+     }
+    }
 }
 

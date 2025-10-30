@@ -1,5 +1,4 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { CanActivate, createParamDecorator, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 @Injectable()
@@ -29,3 +28,9 @@ export class ValidationGuard implements CanActivate {
 
   }
 }
+
+export const GetUser=createParamDecorator(( data:unknown,context: ExecutionContext,)=>{
+ const request=context.switchToHttp().getRequest()
+ console.log(request.user)
+ return request.user
+})

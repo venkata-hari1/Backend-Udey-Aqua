@@ -1,10 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { RegsiterDto, LoginDto } from './dto/auth.dto';
+import { RegsiterDto, LoginDto, ForgetPasswordDto } from './dto/auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Auth, AuthDocument } from './auth.schema';
 import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
+import { GetUser } from 'src/jwt/validation/validation.guard';
 @Controller('auth')
 export class AuthController {
   constructor(@InjectModel(Auth.name) private readonly Model: Model<AuthDocument>,
@@ -18,6 +19,10 @@ export class AuthController {
   @Post('login')
   async login(@Body() body:LoginDto) {
     return this.authService.login(this.Model, this.JwtService, body)
+  }
+  @Post('forgetpassword')
+  async ForgetPassword(@Body() body:ForgetPasswordDto){
+   return this.authService.ForgetPassword(this.Model,body)
   }
 
 }

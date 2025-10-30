@@ -7,7 +7,6 @@ class EmailDto{
     email:string
 }
 export class RegsiterDto extends EmailDto{
-   
     @IsString()
     @IsNotEmpty()
     @Matches(PasswordRegex,{message:'Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character.'})
@@ -16,5 +15,5 @@ export class RegsiterDto extends EmailDto{
 export class LoginDto extends EmailDto{
     @IsNotEmpty()
     password:string
-
 }
+export class ForgetPasswordDto extends EmailDto{}

@@ -4,7 +4,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HomeModule } from './home/home.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './utils/constants';
 @Module({
   imports: [
   ConfigModule.forRoot({isGlobal:true}),
