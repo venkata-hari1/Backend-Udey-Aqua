@@ -54,7 +54,7 @@ export class HomeService {
     }
   }
   async getCommonData(Model, query) {
-    try {
+
       const sectionList = ['herosection', 'aboutus', 'chooseus', 'corporates', 'getintouch', 'footer'] as const;
       const section = query?.section
       if (!section) {
@@ -64,14 +64,10 @@ export class HomeService {
         throw new BadRequestException(`Invalid section. Allowed sections: ${sectionList.join(', ')}`);
       }
       const data = await Model.find({}, { [section]: 1, _id: 0 }).lean()
-      return { status: true, data: data }
-    }
-    catch (err) {
-      throw new InternalServerErrorException(err.message || err)
-    }
+      return { status: true, data: data } 
   }
   async DeleteHomeImages(Model,section, sid, fid,awsService) {
-   try{
+ 
     if (!mongoose.isValidObjectId(sid) || !mongoose.isValidObjectId(fid)) {
       throw new BadRequestException('Invalid ID format');
     }
@@ -110,9 +106,6 @@ export class HomeService {
   );
 
   return { status: true, message: 'File deleted successfully' };
-  }
-   catch(err){
-    throw new InternalServerErrorException(err.message || err)
-   }
+  
   }
 }
