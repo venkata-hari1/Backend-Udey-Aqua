@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HomeModule } from './home/home.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { CommonModule } from './common/common.module';
 @Module({
   imports: [
   ConfigModule.forRoot({isGlobal:true}),
@@ -24,7 +25,8 @@ import { JwtModule } from '@nestjs/jwt';
     inject:[ConfigService]
   }),
   HomeModule,
-  AuthModule
+  AuthModule,
+  CommonModule
   ],
  
 })

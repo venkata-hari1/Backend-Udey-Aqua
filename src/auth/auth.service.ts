@@ -67,7 +67,19 @@ export class AuthService {
     }
  async ResetPassword(Model,body){
     try{
-     
+        if(body.password!==body.confirmpassword){
+            throw new NotFoundException('Password not match');
+        }
+        const salt=await bcrypt.genSalt(10)
+        const hash=await bcrypt.hash(body.password,salt)
+        const result = await Model.findOneAndUpdate(
+            { email: body.email },
+            { $set: { password: hash } },
+            { new: true }
+          );
+          
+        if (!result) throw new NotFoundException('Email not found')
+        return{status:true,message:'password updated successfully'}
     }
     catch(error){
         if (error instanceof NotFoundException) {
